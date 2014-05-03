@@ -1,7 +1,20 @@
 han2phon
 ========
 
-Read Korean text and output a romanized, syllabified form
+Read Korean text (legacy EUC encoding) and output a romanized, syllabified form.
+
+Note
+----
+
+This code solves a problem that no-one should really have anymore. Hangul syllables have three components (an initial, a medial and a final). There are 19 initials, 21 medials and 28 finals, so there are 11,172 possible syllables, of which less than a quarter actually occur. When the EUC encoding was designed, people wanted to save space, so designed a rather ad hoc encoding for the 3,000 or so that do occur. Since the mapping from syllables to code points is not fully systematic, han2phon consists mainly of tables spelling out the layout of the codepoints.
+
+Unicode entirely solves this problem, assigning a codepoint to each of the 11,172 syllables, and laying out the code points in the form of a 19 by 21 by 28. This makes it incredibly straightforward to map back and forth between codepoints and the corresponding (initial, medial, final) triples. No large tables are needed, just array addressing.
+Therefore, it is infinitely preferable either to avoid EUC altogether, or, if you must, simply start by transforming EUC to Unicode, then work with Unicode. 
+
+(Nick explained this to Chris, who wrote the note)
+
+Usage
+-----
 
 Compile with 
 
